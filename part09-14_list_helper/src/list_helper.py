@@ -10,6 +10,7 @@ class ListHelper:
         dic = {}
         greatest = 0
         for i in my_list:
+
             dic[i] = my_list.count(i)
         for k,v in dic.items():
             if v > greatest:
