@@ -5,7 +5,6 @@ class PhoneBook:
 
     def add_number(self, name: str, number: str):
         if not name in self.__persons:
-            # add a new dictionary entry with an empty list for the numbers
             self.__persons[name] = []
 
         self.__persons[name].append(number)
@@ -14,6 +13,13 @@ class PhoneBook:
         if not name in self.__persons:
             return None
         return self.__persons[name]
+    
+    def search_num(self, number: str):
+        for name, numbers in self.__persons.items():
+            for n in numbers: 
+                if n == number: 
+                    return name
+        return None
 
 
     def all_entries(self):
@@ -53,6 +59,7 @@ class PhoneBookApplication:
         print("0 exit")
         print("1 add entry")
         print("2 search")
+        print("3 search by number")
 
     def add_entry(self):
         name = input("name: ")
@@ -67,6 +74,14 @@ class PhoneBookApplication:
             return
         for number in numbers:
             print(number)
+            
+    def search_number(self):
+        number = input("Number: ")
+        name = self.__phonebook.search_num(number)
+        if name == None:
+            print("unknown number")
+            return
+        print(name)
 
     def exit(self):
         self.__filehandler.save_file(self.__phonebook.all_entries())
@@ -84,9 +99,11 @@ class PhoneBookApplication:
                 self.add_entry()
             elif command == "2":
                 self.search()
+            elif command == "3":
+                self.search_number()
             else:
                 self.help()
 
-# when you run the tests, nothing apart from these two lines should be placed in the main function, outside any class definitions 
+
 application = PhoneBookApplication()
 application.execute()

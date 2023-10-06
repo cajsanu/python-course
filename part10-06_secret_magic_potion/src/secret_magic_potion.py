@@ -4,7 +4,7 @@ class MagicPotion:
         self._name = name
         self._ingredients = []
 
-    def add_ingredient(self, ingredient: str, amount: float):
+    def add_ingredient(self, ingredient: str, amount: float): 
         self._ingredients.append((ingredient, amount))
 
     def print_recipe(self):
